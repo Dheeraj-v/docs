@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<Script>
+	var Arr = ['one', 'two', 'three'];
+
+	Arr.forEach(function(arr, index){  //For Each
+		console.log(index +' '+ arr)
+	})
+
+	var obj = [
+		{
+			name:'Dheeraj',
+			edu:'CSE'
+		},
+		{
+			name:'Sakthi',
+			edu:'ECE'
+
+		}
+	]
+
+//-------------------------------------------------------	// For In
+	for (i in obj){ 				
+		console.log(obj[i].name)
+		console.log(obj[i].edu)
+	}
+//------------------------------------------------------// filter
+	function findOf(Arr){
+			return Arr =='two'
+	}
+	console.log(Arr.filter(findOf))
+//--------------------------------------------------------//callbacks
+		DisplayItem('Dheeraj', showMsg);   //callbacks
+	function DisplayItem (name, callback){
+			console.log(name);
+			name = name + name;
+			callback(name);
+	}
+	function showMsg(name){
+		console.log('inside secondfunction '+ name)
+	}
+//----------------------------------------------------------------------------
+	setTimeout(function(){   //settimeout
+		for (i=0;i<3;i++){
+			console.log(i); 			
+		}
+	}, 3000);
+//-----------------------------------------------------------------------------------
+		for (i=0;i<3;i++){
+			setTimeout(function(){
+			console.log(i); 	
+			}, 3000);
+		}
+//---------------------------------------------------------------- inheritance
+
+var classA =function(){
+	this.name = "Class A";
+}
+
+
+var classB =function(){
+	this.name = "class B";
+}
+classA.prototype.print = function(){
+	console.log(this.name)
+}
+
+
+classB.prototype = Object.create(classA.prototype);
+
+
+var a = new classA();
+var b = new classB();
+a.print();
+b.print();
+
+//-------------------------------------------------------------------- simple closures 
+
+function showName (firstname){
+	console.log(firstname + " outerfunction")
+	function fullName(lastname) {
+		console.log(firstname +" "+ lastname + " innerfunction")
+	}
+	return fullName;
+
+}
+	var x = showName("michael");
+	x("jackson");
+
+//---------------------------------------------------------------------	
+
+function outerFunc(){			//closures with for loop
+	for(i=0;i<3;i++){
+		function innerFunc(j){
+			//return function(){
+			 console.log(j + " closures")
+		//}()
+		}(i)
+	}
+	innerFunc(1);
+}
+outerFunc();
+
+//-----------------------------------------------------------------
+
+function toUpper (input){
+	return input.toUpperCase();
+}
+
+console.log(toUpper("Dheeraj"))
+//----------------------------------------------------------------------
+String.prototype.toupper = function(){  // adding custom methods to string
+	return this.toUpperCase();
+}
+str = "dheeraj"
+console.log(str.toupper());
+//-------------------------------------------------------
+var a = [1,2,3,4,5];					//map, filter methods
+var b = a.filter(function(num){
+	if(num%2==0){
+		return num
+	}
+	
+})
+console.log( b)
+//----------------------------------------------------------------
+var pokemon = {							// bind
+	firstname: 'pika',
+	lastname: 'chu',
+	getPokeName : function(){
+		var fullName = this.firstname + " " + this.lastname;
+		return fullName;
+	}
+};
+	var pokemonName = function(snack, hobby) {
+    console.log(this.getPokeName() + 'I choose you!');
+    console.log(this.getPokeName() + ' loves ' + snack + ' and ' + hobby);
+};
+
+	var logPokemon = pokemonName.bind(pokemon);
+	logPokemon('biscuit', 'choco');
+	pokemonName.call(pokemon, 'call', 'method')
+	pokemonName.apply(pokemon, ['call', 'method'])
+
+//----------------------------------------------------------------------
+</Script>
+</body>
+</html>
